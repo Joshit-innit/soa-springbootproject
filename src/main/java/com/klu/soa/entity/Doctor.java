@@ -124,7 +124,7 @@ public class Doctor {
 	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUodatedAt(LocalDateTime updatedAt) {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.klu.soa.entity.Doctor;
 import com.klu.soa.service.DoctorService;
@@ -22,8 +23,11 @@ import com.klu.soa.service.DoctorService;
 @RequestMapping("/doctor")
 public class DoctorController {
 	
-	@Autowired
-	private DoctorService service;
+	private final DoctorService service;
+
+	DoctorController(DoctorService service) {
+		this.service = service;
+	}
 	
 	@GetMapping("/")
 	public String demo() {
@@ -44,7 +48,7 @@ public class DoctorController {
 		return ResponseEntity.status(200).body(doctors);
 	}
 	
-	// Display docotor by id
+	// Display doctor by id
 	
 	@GetMapping("/display")
 	public ResponseEntity<?> displayDoctorById(@RequestParam Long id) {
@@ -88,6 +92,15 @@ public class DoctorController {
 		{
 			List<Doctor> doctors = service.displayDoctorsByGender(gender);
 			return ResponseEntity.status(200).body(doctors);
+		}
+		
+		
+		//counting doctors
+		@GetMapping("/count")
+		public ResponseEntity<String> doctorCount() {
+			Long count = service.doctorCount();
+			String msg = "Total Count : " + count;
+			return ResponseEntity.ok(msg);
 		}
 	
 	

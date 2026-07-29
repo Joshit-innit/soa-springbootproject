@@ -66,4 +66,8 @@ public class DoctorServiceImpl implements DoctorService {
 		return doctorrepository.findByGender(gender);
 	}
 	
+	public Long doctorCount() {
+		return doctorrepository.count();
+	}
+	
 }
